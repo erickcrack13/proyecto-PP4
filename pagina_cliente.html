@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Cliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #3B82F6;
+            /* Un azul primario para elementos principales */
+            --dark-blue: #1E3A8A;
+            /* Azul oscuro para texto o fondos sutiles */
+            --light-blue: #BFDBFE;
+            /* Azul claro para acentos */
+            --accent-orange: #F97316;
+            /* Naranja para botones de acción o énfasis */
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #E5E7EB;
+            /* Gris muy claro para bordes o separadores */
+            --gray-medium: #6B7280;
+            /* Gris medio para texto secundario */
+            --red-error: #EF4444;
+            /* Rojo para mensajes de error */
+            --header-gradient-start: #6366f1;
+            /* Gradiente de inicio para el header */
+            --header-gradient-end: #0ea5e9;
+            /* Gradiente de fin para el header */
+        }
+
+        /* Estilos generales para el cuerpo de la página */
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: 
+                radial-gradient(circle at 25% 75%, rgba(161, 196, 253, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(194, 233, 251, 0.8) 0%, transparent 50%),
+                linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            background-size: cover;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: bgFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+            z-index: 1;
+        }
+
+        /* ==================================== */
+        /* SECCIÓN 2: ESTILOS DEL ENCABEZADO (HEADER) - Adaptado de admin_login.html */
+        /* ==================================== */
+        header {
+            background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 100%);
+            /* Usando variables de admin_login */
+            color: #ffffff;
+            padding: 48px 20px 32px 20px;
+            width: 100%;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.08);
+            border-bottom-left-radius: 32px;
+            border-bottom-right-radius: 32px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2em;
+            margin: 0 auto;
+            text-align: center;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1px 0 #0ea5e9;
+            line-height: 1.1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-buttons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 48px;
+            padding-left: 20px;
+            box-sizing: border-box;
+            z-index: 20;
+        }
+
+        .support-button,
+        .header-button {
+            background: #F97316;
+            /* Usando accent-orange de admin_login */
+            color: #ffffff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 90%;
+            max-width: 300px;
+            margin: 5px auto;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .support-button:hover,
+        .header-button:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Estilos del botón de menú hamburguesa */
+        .hotdog-menu-button {
+            display: block;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: relative;
+            z-index: 100;
+            color: #ffffff;
+            font-size: 1.5em;
+        }
+
+        .hotdog-menu-icon {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        .hotdog-menu-icon::before,
+        .hotdog-menu-icon::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            position: absolute;
+            transition: transform 0.3s ease;
+        }
+
+        .hotdog-menu-icon::before {
+            top: -10px;
+        }
+
+        .hotdog-menu-icon::after {
+            top: 10px;
+        }
+
+        .hotdog-menu-button.open .hotdog-menu-icon {
+            background-color: transparent;
+        }
+
+        .hotdog-menu-button.open .hotdog-menu-icon::before {
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        .hotdog-menu-button.open .hotdog-menu-icon::after {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        /* Estilos del contenido del menú principal */
+        .dropdown-menu-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(99, 102, 241, 0.95);
+            /* Usando header-gradient-start de admin_login */
+            padding: 20px 0;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: calc(48px + 30px + 10px);
+            left: 20px;
+            right: auto;
+            width: 220px;
+            max-width: 90%;
+            z-index: 90;
+            transform-origin: top left;
+            opacity: 0;
+            transform: scaleY(0);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        .dropdown-menu-content.active {
+            display: flex;
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        /* Fin de estilos del header y menú */
+
+        /* Estilos para el contenedor principal del formulario */
+        .auth-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.10);
+            width: 380px;
+            max-width: 90vw;
+            text-align: center;
+            box-sizing: border-box;
+            z-index: 1;
+            animation: slideInBounce 0.8s ease-out;
+        }
+
+        @keyframes slideInBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(10px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Estilos para el título del formulario */
+        .auth-container h2 {
+            font-family: 'Playfair Display', serif;
+            color: #3730a3;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        /* Estilos para las etiquetas de los campos */
+        .auth-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 10px;
+            color: #3730a3;
+            font-weight: 600;
+        }
+
+        /* Estilos para los campos de entrada */
+        .auth-container input[type="text"],
+        .auth-container input[type="tel"],
+        .auth-container input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.1em;
+            box-sizing: border-box;
+        }
+
+        /* Estilos para los botones */
+        .auth-container button {
+            background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 100%);
+            color: #fff;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.08em;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.10);
+            transition: background 0.2s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .auth-container button:hover {
+            background: linear-gradient(90deg, #0ea5e9 0%, #6366f1 100%);
+            transform: translateY(-2px);
+        }
+
+        /* Estilos para el mensaje de error */
+        .error-message {
+            color: #ef4444;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        /* Estilos para el botón de alternar entre formularios */
+        .toggle-form-button {
+            background: none;
+            border: none;
+            color: #3730a3;
+            font-size: 0.95em;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .toggle-form-button:hover {
+            color: #4f46e5;
+        }
+
+        /* Estilos para el botón de regreso a la página principal */
+        .back-home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .back-home-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Media Queries para responsividad en pantallas pequeñas */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 30px;
+                width: 90vw;
+            }
+
+            .auth-container h2 {
+                font-size: 1.8em;
+            }
+
+            .auth-container input {
+                font-size: 1em;
+            }
+
+            .auth-container button {
+                padding: 12px 24px;
+                font-size: 1em;
+            }
+
+            .back-home-button {
+                top: 10px;
+                left: 10px;
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-home-button">Volver al Inicio</a>
+
+    <div class="auth-container">
+        <h2 id="form-title">Acceso Cliente</h2>
+
+        <!-- Formulario de Registro -->
+        <form id="register-form" style="display: none;">
+            <label for="reg-name">Nombre:</label>
+            <input type="text" id="reg-name" required>
+
+            <label for="reg-cedula">Cédula:</label>
+            <input type="text" id="reg-cedula" pattern="[0-9]{6,10}"
+                title="La cédula debe contener solo números (6 a 10 dígitos)" required>
+
+            <label for="reg-phone">Teléfono:</label>
+            <input type="tel" id="reg-phone" pattern="[0-9]{7,15}"
+                title="El teléfono debe contener solo números (7 a 15 dígitos)" required>
+
+            <label for="reg-password">Contraseña:</label>
+            <input type="password" id="reg-password" required>
+
+            <p id="reg-error-message" class="error-message" style="display: none;"></p>
+            <button type="submit">Registrar</button>
+            <button type="button" class="toggle-form-button" onclick="showLoginForm()">Ya tengo una cuenta</button>
+        </form>
+
+        <!-- Formulario de Inicio de Sesión -->
+        <form id="login-form">
+            <label for="login-cedula">Cédula:</label>
+            <input type="text" id="login-cedula" required>
+
+            <label for="login-password">Contraseña:</label>
+            <input type="password" id="login-password" required>
+
+            <p id="login-error-message" class="error-message" style="display: none;">Cédula o contraseña incorrecta.
+                Inténtalo de nuevo.</p>
+            <button type="submit">Iniciar Sesión</button>
+            <button type="button" class="toggle-form-button" onclick="showRegisterForm()">Crear nueva cuenta</button>
+        </form>
+    </div>
+
+    <script>
+        // --- Referencias a Elementos del DOM ---
+        const formTitle = document.getElementById('form-title');
+        const registerForm = document.getElementById('register-form');
+        const loginForm = document.getElementById('login-form');
+
+        // Registro Inputs
+        const regNameInput = document.getElementById('reg-name');
+        const regCedulaInput = document.getElementById('reg-cedula');
+        const regPhoneInput = document.getElementById('reg-phone');
+        const regPasswordInput = document.getElementById('reg-password');
+        const regErrorMessage = document.getElementById('reg-error-message');
+
+        // Login Inputs
+        const loginCedulaInput = document.getElementById('login-cedula');
+        const loginPasswordInput = document.getElementById('login-password');
+        const loginErrorMessage = document.getElementById('login-error-message');
+
+        // --- Referencias a Elementos del DOM para el menú de hamburguesa ---
+        const hotdogMenuToggle = document.getElementById('hotdog-menu-toggle');
+        const mainMenuContent = document.getElementById('main-menu-content');
+
+        // --- Función para cerrar el menú ---
+        function closeMenu() {
+            mainMenuContent.classList.remove('active');
+            hotdogMenuToggle.classList.remove('open');
+        }
+
+        // --- Funciones para alternar formularios ---
+        function showRegisterForm() {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            formTitle.textContent = 'Registro de Cliente';
+            loginErrorMessage.style.display = 'none'; // Ocultar mensaje de error de login
+            closeMenu(); // Cierra el menú al cambiar de formulario
+        }
+
+        function showLoginForm() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            formTitle.textContent = 'Acceso Cliente';
+            regErrorMessage.style.display = 'none'; // Ocultar mensaje de error de registro
+            closeMenu(); // Cierra el menú al cambiar de formulario
+        }
+
+        // --- Manejador del Evento de Envío del Formulario de Registro ---
+        registerForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Previene el recargo de la página
+
+            const name = regNameInput.value.trim();
+            const cedula = regCedulaInput.value.trim();
+            const phone = regPhoneInput.value.trim();
+            const password = regPasswordInput.value.trim();
+
+            if (!name || !cedula || !phone || !password) {
+                regErrorMessage.textContent = 'Por favor, completa todos los campos.';
+                regErrorMessage.style.display = 'block';
+                return;
+            }
+
+            if (localStorage.getItem(cedula)) {
+                regErrorMessage.textContent = 'Ya existe una cuenta registrada con esta cédula.';
+                regErrorMessage.style.display = 'block';
+                return;
+            }
+
+            // Guardar datos del usuario en localStorage
+            const userData = {
+                name: name,
+                cedula: cedula,
+                phone: phone,
+                password: password // ¡RECUERDA: NO SEGURO PARA PRODUCCIÓN!
+            };
+            localStorage.setItem(cedula, JSON.stringify(userData)); // Usa la cédula como clave
+
+            regErrorMessage.textContent = '¡Registro exitoso! Ahora puedes iniciar sesión.';
+            regErrorMessage.style.color = '#22c55e'; // Verde para éxito
+            regErrorMessage.style.display = 'block';
+
+            // Limpiar campos y cambiar a formulario de login después de un breve retraso
+            setTimeout(() => {
+                regNameInput.value = '';
+                regCedulaInput.value = '';
+                regPhoneInput.value = '';
+                regPasswordInput.value = '';
+                regErrorMessage.style.display = 'none';
+                regErrorMessage.style.color = '#ef4444'; // Volver al color original
+                showLoginForm();
+            }, 1500);
+        });
+
+        // --- Manejador del Evento de Envío del Formulario de Login ---
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Previene el recargo de la página
+
+            const cedula = loginCedulaInput.value.trim();
+            const password = loginPasswordInput.value.trim();
+
+            if (!cedula || !password) {
+                loginErrorMessage.textContent = 'Por favor, ingresa tu cédula y contraseña.';
+                loginErrorMessage.style.display = 'block';
+                return;
+            }
+
+            const storedUser = localStorage.getItem(cedula);
+
+            if (storedUser) {
+                const userData = JSON.parse(storedUser);
+                if (userData.password === password) {
+                    // Login exitoso
+                    sessionStorage.setItem('clientLoggedIn', 'true');
+                    sessionStorage.setItem('clientCedula', cedula); // Guarda la cédula del usuario loggeado
+                    window.location.href = './perfil.html'; // Redirige a la página del cliente
+                } else {
+                    loginErrorMessage.textContent = 'Cédula o contraseña incorrecta. Inténtalo de nuevo.';
+                    loginErrorMessage.style.display = 'block';
+                    loginPasswordInput.value = ''; // Limpiar contraseña
+                    loginPasswordInput.focus();
+                }
+            } else {
+                loginErrorMessage.textContent = 'Cédula no registrada. Por favor, regístrate.';
+                loginErrorMessage.style.display = 'block';
+                loginCedulaInput.value = '';
+                loginPasswordInput.value = '';
+                loginCedulaInput.focus();
+            }
+        });
+
+        // --- Lógica para el menú de hamburguesa ---
+        hotdogMenuToggle.addEventListener('click', function(event) {
+            event.stopPropagation(); // Evita que el clic se propague al documento
+            mainMenuContent.classList.toggle('active');
+            hotdogMenuToggle.classList.toggle('open');
+        });
+
+        // Cierra el menú si se hace clic fuera de él
+        document.addEventListener('click', function(event) {
+            if (!mainMenuContent.contains(event.target) && !hotdogMenuToggle.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        // Manejador de clic para el botón de cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            sessionStorage.removeItem('clientLoggedIn');
+            sessionStorage.removeItem('clientCedula');
+            window.location.href = 'index.html'; // Redirige a la página principal
+        });
+
+        // Cierra el menú si se redimensiona la ventana (útil para pasar de móvil a desktop)
+        window.addEventListener('resize', closeMenu);
+    </script>
+</body>
+
+</html>

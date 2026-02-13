@@ -1,0 +1,401 @@
+
+        /* ==================================== */
+        /* SECCIÓN 1: VARIABLES CSS Y ESTILOS GENERALES */
+        /* ==================================== */
+        :root {
+            --primary-blue: #3B82F6; /* Un azul primario para elementos principales */
+            --dark-blue: #1E3A8A; /* Azul oscuro para texto o fondos sutiles */
+            --light-blue: #BFDBFE; /* Azul claro para acentos */
+            --accent-orange: #F97316; /* Naranja para botones de acción o énfasis */
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #E5E7EB; /* Gris muy claro para bordes o separadores */
+            --gray-medium: #6B7280; /* Gris medio para texto secundario */
+            --red-error: #EF4444; /* Rojo para mensajes de error */
+            --header-gradient-start: #6366f1; /* Gradiente de inicio para el header */
+            --header-gradient-end: #0ea5e9; /* Gradiente de fin para el header */
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+            background-color: #333;
+            color: var(--dark-blue);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* ==================================== */
+        /* SECCIÓN 1: VARIABLES CSS Y ESTILOS GENERALES */
+        /* ==================================== */
+        header {
+            background: linear-gradient(90deg, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%);
+            color: var(--white);
+            padding: 48px 20px 32px 20px;
+            width: 100%;
+            box-shadow: 0 4px 16px rgba(var(--header-gradient-start), 0.08);
+            border-bottom-left-radius: 32px;
+            border-bottom-right-radius: 32px;
+            position: relative;
+            box-sizing: border-box;
+            z-index: 10;
+            margin-bottom: 50px;
+            display: flex; /* Añadido para Flexbox en el header */
+            flex-direction: column; /* Apila el título y la navegación */
+            align-items: center; /* Centra horizontalmente */
+            justify-content: center;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2em;
+            margin: 0 auto 20px auto; /* Margen inferior para separar del nav */
+            text-align: center;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 1px 0 var(--header-gradient-end);
+            line-height: 1.1;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Eliminado: .header-buttons para el menú de hamburguesa */
+        /* Eliminado: .support-button, .header-button para los estilos de botones del dropdown */
+
+        /* Nuevos estilos para la navegación en línea */
+        .header-nav-inline {
+            display: flex;
+            justify-content: center; /* Centra los botones horizontalmente */
+            align-items: center;
+            flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+            gap: 15px; /* Espacio entre los botones */
+            width: 100%; /* Ocupa todo el ancho disponible */
+            padding: 0 20px; /* Padding horizontal */
+            box-sizing: border-box;
+        }
+
+        .header-nav-button {
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: inline-flex; /* Para que el padding se aplique correctamente si es un 'a' o 'button' */
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0; /* Evita que los botones se achiquen demasiado */
+            min-width: 120px; /* Ancho mínimo para mantener la estética */
+        }
+
+        .header-nav-button:hover {
+            background: #ea580c; /* Un tono más oscuro de naranja */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ==================================== */
+        /* Eliminado: SECCIÓN 3: ESTILOS DEL BOTÓN DE MENÚ HAMBURGUESA */
+/* ==================================== */
+/* 1. KEYFRAMES DE APARICIÓN MODERNA */
+/* ==================================== */
+
+/* Animación base: Se desliza 20px desde abajo y se vuelve visible */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+        /* ==================================== */
+/* SECCIÓN 3: ANIMACIONES CSS */
+/* ==================================== */
+
+/* Define los fotogramas clave de la animación */
+        /* Eliminado: SECCIÓN 4: ESTILOS DEL CONTENIDO DEL MENÚ PRINCIPAL */
+        /* ==================================== */
+
+        /* ==================================== */
+        /* SECCIÓN 5: ESTILOS DEL CONTENIDO PRINCIPAL HORIZONTAL (FONDO BLANCO) */
+        /* ==================================== */
+
+        .main-content-wrapper {
+            display: flex;
+            flex-direction: row;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto 40px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .welcome-section {
+            flex: 1;
+            text-align: center;
+            padding-right: 15px;
+        }
+
+        .welcome-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            color: var(--gray-medium);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .welcome-section .cta-button {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px; /* Espacio debajo del botón */
+        }
+
+        .welcome-section .cta-button:hover {
+            background-color: #ea580c;
+        }
+
+        .inventory-section {
+            flex: 1;
+            padding-left: 15px;
+        }
+
+        .inventory-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .inventory-section .category-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inventory-section .category-card h3 {
+            margin: 0;
+            color: var(--dark-blue);
+            font-size: 1.1em;
+        }
+
+        .inventory-section .view-button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .inventory-section .view-button:hover {
+            background-color: #2563eb;
+        }
+
+        .product-list-container {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .product-list-container h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--dark-blue);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+        }
+
+        .product-list-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-list-container ul li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95em;
+            color: var(--gray-medium);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* Nuevo estilo para la imagen del producto en la lista */
+        .product-list-container ul li img {
+            width: 40px; /* Tamaño de la imagen */
+            height: 40px;
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsión */
+            border-radius: 5px; /* Bordes ligeramente redondeados */
+            margin-right: 10px; /* Espacio a la derecha de la imagen */
+            flex-shrink: 0; /* Evita que la imagen se encoja */
+        }
+
+
+        .product-list-container ul li span.price {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .back-home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(var(--white), 0.2); 
+            color: var(--white);
+            border: 1px solid rgba(var(--white), 0.4);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            backdrop-filter: blur(5px);
+            z-index: 200;
+        }
+
+        .back-home-button:hover {
+            background: rgba(var(--white), 0.3);
+            transform: translateY(-3px);
+            border-color: rgba(var(--white), 0.6);
+        }
+
+        /* ==================================== */
+        /* SECCIÓN 7: ESTILOS DEL FOOTER */
+        /* ==================================== */
+
+        .footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            margin-top: auto;
+            box-sizing: border-box;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        /* ==================================== */
+        /* SECCIÓN 6: MEDIA QUERIES PARA RESPONSIVIDAD */
+        /* ==================================== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            header {
+                padding: 48px 15px 32px 15px;
+                margin-bottom: 30px;
+            }
+            /* Eliminado: .header-buttons para el menú de hamburguesa */
+            /* Eliminado: .dropdown-menu-content */
+            .back-home-button {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+
+            .main-content-wrapper {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .welcome-section,
+            .inventory-section {
+                flex: none;
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .welcome-section {
+                text-align: center;
+            }
+
+            .inventory-section h2 {
+                text-align: center;
+            }
+
+            .header-nav-inline {
+                flex-direction: column; /* Apila los botones en columnas en móviles */
+                gap: 10px; /* Reduce el espacio entre botones */
+                padding: 0;
+            }
+
+            .header-nav-button {
+                width: 90%; /* Los botones ocupan casi todo el ancho */
+                max-width: 300px; /* Máximo ancho para no ser demasiado grandes en tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .back-home-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+        }

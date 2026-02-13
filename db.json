@@ -1,0 +1,100 @@
+{
+  "version": "1.0.0",
+  "products": [
+    {
+      "id": "p1",
+      "nombre": "Laptop Gamer",
+      "categoria": "computadoras",
+      "precio": 650,
+      "urlImagen": "IMAGENES/lapto gamers.jpg",
+      "descripcion": "Laptop gamer de alta gama con procesador Intel Core i7",
+      "fechaCreacion": "2026-02-06T13:00:12.566Z",
+      "ultimaActualizacion": "2026-02-06T13:00:12.566Z"
+    },
+    {
+      "id": "p9",
+      "nombre": "Tarjeta Gráfica",
+      "categoria": "componentes",
+      "precio": 420,
+      "urlImagen": "IMAGENES/targeta grafica.jpg",
+      "descripcion": "Tarjeta gráfica NVIDIA RTX 3060 8GB",
+      "fechaCreacion": "2026-02-06T13:00:12.566Z",
+      "ultimaActualizacion": "2026-02-06T13:00:12.566Z"
+    },
+    {
+      "id": "p12",
+      "nombre": "PC Completo 1",
+      "categoria": "computadoras",
+      "precio": 1200,
+      "urlImagen": "IMAGENES/pc 1.jpg",
+      "descripcion": "Computadora completa con procesador Intel Core i5",
+      "fechaCreacion": "2026-02-06T13:00:12.566Z",
+      "ultimaActualizacion": "2026-02-06T13:00:12.566Z"
+    },
+    {
+      "id": "p13",
+      "nombre": "PC Completo 2",
+      "categoria": "computadoras",
+      "precio": 1400,
+      "urlImagen": "IMAGENES/pc 2.jpg",
+      "descripcion": "Computadora completa con procesador Intel Core i7",
+      "fechaCreacion": "2026-02-06T13:00:12.566Z",
+      "ultimaActualizacion": "2026-02-06T13:00:12.566Z"
+    },
+    {
+      "id": "p14",
+      "nombre": "PC Completo 3",
+      "categoria": "computadoras",
+      "precio": 1600,
+      "urlImagen": "IMAGENES/pc 3.jpg",
+      "descripcion": "Computadora completa con procesador AMD Ryzen 7",
+      "fechaCreacion": "2026-02-06T13:00:12.566Z",
+      "ultimaActualizacion": "2026-02-06T13:00:12.566Z"
+    },
+    {
+      "id": "p15",
+      "nombre": "Mini CPU",
+      "categoria": "computadoras",
+      "precio": 300,
+      "urlImagen": "IMAGENES/mini cpu.jpg",
+      "descripcion": "Mini PC compacto con procesador Intel Celeron",
+      "fechaCreacion": "2026-02-06T13:00:12.566Z",
+      "ultimaActualizacion": "2026-02-06T13:00:12.566Z"
+    }
+  ],
+  "clients": [
+    {
+      "id": "client_1770936291619",
+      "nombre": "erick castillo",
+      "cedula": "28325938",
+      "email": "erick391745@gmail.com",
+      "telefono": "02415645448",
+      "balance": 0,
+      "fechaRegistro": "2026-02-12T22:44:51.621Z",
+      "ultimaActividad": "2026-02-12T22:44:51.622Z"
+    },
+    {
+      "id": "client_1770938642715",
+      "nombre": "erick castillo",
+      "cedula": "14448538",
+      "email": "erickesmith_castillo@hotmail.com",
+      "telefono": "54545454",
+      "balance": 0,
+      "fechaRegistro": "2026-02-12T23:24:02.715Z",
+      "ultimaActividad": "2026-02-12T23:24:02.715Z"
+    }
+  ],
+  "transactions": [],
+  "rate": 50,
+  "settings": {
+    "currency": "USD",
+    "language": "es",
+    "timezone": "America/Caracas"
+  },
+  "metadata": {
+    "created": "2026-02-06T13:00:12.566Z",
+    "lastBackup": "2026-02-06T13:00:12.600Z",
+    "totalTransactions": 0,
+    "lastModified": "2026-02-13T13:40:24.367Z"
+  }
+}

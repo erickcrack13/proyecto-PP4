@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>KING DISEÑO — Tienda Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-body: #08090d;
+            --bg-card: #12141c;
+            --accent: #00d1ff; /* Azul neón de la imagen */
+            --accent-glow: rgba(0, 209, 255, 0.4);
+            --accent-orange: #ff8c00;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 209, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.05) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* NAVBAR MODERNA */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), #0062ff);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* GRID DE PRODUCTOS MEJORADO */
+        .wrap {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 209, 255, 0.1);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover img {
+            transform: scale(1.1);
+        }
+
+        .product .name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 15px 0 5px 0;
+        }
+
+        .price-tag {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        /* BOTONES ESTILO CYBER */
+        .btn-add {
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            background: linear-gradient(90deg, #00d1ff, #0062ff);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-add:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* CARRITO DE CRISTAL (ASIDE) */
+        .cart {
+            background: rgba(18, 20, 28, 0.7);
+            backdrop-filter: blur(25px);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .cart h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid transparent;
+        }
+
+        .cart-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--glass-border);
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            background: #1e212a;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        #checkout {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent-orange);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
+        }
+
+        #checkout:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 140, 0, 0.5);
+        }
+
+        /* BOTONES SMALL EN NAVBAR */
+        .small-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .small-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* ESTILOS PARA BUSCADOR Y SELECT */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        input[type="search"], select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: #000;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        input[type="search"]:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+            outline: none;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: #000;
+            color: #fff;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .wrap { grid-template-columns: 1fr; }
+            .cart { position: relative; top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="logo">KD</div>
+                <h1>KING DISEÑO</h1>
+            </div>
+            <div class="controls">
+                <button onclick="history.back()" class="small-btn" title="Volver">← Volver</button>
+                <button onclick="window.location.href='index.html'" class="small-btn" title="Inicio">Inicio</button>
+                <button onclick="window.location.href='perfil.html'" class="small-btn" title="Perfil">Perfil</button>
+                <button onclick="window.location.href='gestion.html'" class="small-btn" title="Gestión">Gestión</button>
+            </div>
+        </header>
+
+        <div class="wrap">
+            <main class="panel" aria-labelledby="productos-heading">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                    <div>
+                        <h2 id="productos-heading" style="margin:0;font-size:1.05rem">Productos</h2>
+                        <div style="font-size:13px;color:var(--muted)">Selecciona productos y agrégalos al carrito</div>
+                    </div>
+
+                    <div class="controls" role="search" aria-label="Buscar y filtrar">
+                        <input id="search" type="search" placeholder="Buscar producto..."
+                            aria-label="Buscar producto" />
+                        <select id="filter-cat" aria-label="Filtrar por categoría">
+                            <option value="">Todas las categorías</option>
+                        </select>
+
+                        <div style="display:flex;flex-direction:column;align-items:flex-end">
+                            <label style="font-size:12px;color:var(--muted);margin-bottom:4px">Tasa (Bs / USD)</label>
+                            <input id="rate" type="text" readonly disabled
+                                style="width:110px;padding:8px;border-radius:8px;border:1px solid #e6eef8;background:#fbfdff;font-weight:600"
+                                title="La tasa la administra el área de gestión" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products" class="products-grid" aria-live="polite"></div>
+
+                <div class="note">Si no hay productos cargados, se usarán ejemplos. Tasa gestionada por administración.
+                </div>
+            </main>
+
+            <aside class="cart" aria-labelledby="cart-heading">
+                <h2 id="cart-heading">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="m1 1 4 4h15l-1 5H6"></path>
+                    </svg>
+                    Carrito
+                </h2>
+                <ul id="cart-list" class="cart-list">
+                    <li style="color:#6b7280;padding:10px">El carrito está vacío.</li>
+                </ul>
+                <div class="cart-summary">
+                    <div style="display:flex;justify-content:space-between;margin:10px 0">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$ 0.00</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin:10px 0">
+                        <span>IVA (5%):</span>
+                        <span id="iva">$ 0.00</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin:10px 0;font-weight:700">
+                        <span>Total:</span>
+                        <span id="total">$ 0.00</span>
+                    </div>
+                </div>
+                <button id="checkout">Proceder al Pago</button>
+            </aside>
+
+        </div>
+    </div>
+
+    <script>
+        /* Carrito inteligente — comportamiento (mejorado: escucha storage y subtotal Bs por item) */
+        (function () {
+            const PRODUCTS_KEY = 'productosInventario';
+            const RATE_KEY = 'exchangeRateBsPerUsd';
+            const CART_KEY = 'carritoPagos';
+            const IVA = 0.05;
+
+            // DOM
+            const productsEl = document.getElementById('products');
+            const filterCat = document.getElementById('filter-cat');
+            const searchInput = document.getElementById('search');
+            const rateInput = document.getElementById('rate');
+            const cartList = document.getElementById('cart-list');
+            const subtotalEl = document.getElementById('subtotal');
+            const ivaEl = document.getElementById('iva');
+            const totalEl = document.getElementById('total');
+            const checkoutBtn = document.getElementById('checkout');
+
+            // estado
+            let products = [];
+            let categories = new Set();
+            let cart = {};
+
+            // util
+            function fmt(num, opts = {}) {
+                if (opts.bs) return 'Bs ' + Number(num).toLocaleString('es-VE', { maximumFractionDigits: 2 });
+                return '$ ' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            // carga productos desde el servidor API
+            async function loadProducts() {
+                try {
+                    const response = await fetch('/api/products');
+                    if (!response.ok) throw new Error('Error al cargar productos');
+                    products = await response.json();
+                } catch (e) {
+                    console.error('Error cargando productos:', e);
+                    // fallback ejemplos con imágenes locales
+                    products = [
+                        { id: 'p1', nombre: 'Laptop Gamer', categoria: 'computadoras', precio: 650, urlImagen: 'IMAGENES/lapto%20gamers.jpg' },
+                        { id: 'p2', nombre: 'Monitor 24" FHD', categoria: 'monitores', precio: 150, urlImagen: 'IMAGENES/monitor.jpg' },
+                        { id: 'p3', nombre: 'Mouse Gamer', categoria: 'periféricos', precio: 25, urlImagen: 'IMAGENES/mouse%20gamer.jpg' },
+                        { id: 'p4', nombre: 'Teclado Gamer RGB', categoria: 'periféricos', precio: 75, urlImagen: 'IMAGENES/teclado%20gamer.jpg' },
+                        { id: 'p5', nombre: 'Silla Gamer', categoria: 'muebles', precio: 180, urlImagen: 'IMAGENES/silla%20gamer%201.jpg' },
+                        { id: 'p6', nombre: 'Impresora Epson', categoria: 'impresoras', precio: 220, urlImagen: 'IMAGENES/impresora%20epso.jpg' },
+                        { id: 'p7', nombre: 'Disco 1TB SSD', categoria: 'almacenamiento', precio: 95, urlImagen: 'IMAGENES/disco%201TB.jpg' },
+                        { id: 'p8', nombre: 'Router WiFi', categoria: 'red', precio: 60, urlImagen: 'IMAGENES/rounter%20wifi.jpg' },
+                        { id: 'p9', nombre: 'Tarjeta Gráfica', categoria: 'componentes', precio: 420, urlImagen: 'IMAGENES/targeta%20grafica.jpg' },
+                        { id: 'p10', nombre: 'Teclado Compacto', categoria: 'periféricos', precio: 40, urlImagen: 'IMAGENES/teclado.jpg' },
+                        { id: 'p11', nombre: 'Auriculares Gamer', categoria: 'periféricos', precio: 80, urlImagen: 'IMAGENES/auriculares%20gamer.jpg' },
+                        { id: 'p12', nombre: 'PC Completo 1', categoria: 'computadoras', precio: 1200, urlImagen: 'IMAGENES/pc%201.jpg' },
+                        { id: 'p13', nombre: 'PC Completo 2', categoria: 'computadoras', precio: 1400, urlImagen: 'IMAGENES/pc%202.jpg' },
+                        { id: 'p14', nombre: 'PC Completo 3', categoria: 'computadoras', precio: 1600, urlImagen: 'IMAGENES/pc%203.jpg' },
+                        { id: 'p15', nombre: 'Mini CPU', categoria: 'computadoras', precio: 300, urlImagen: 'IMAGENES/mini%20cpu.jpg' },
+                    ];
+                }
+                // normalizar mínimos
+                products = products.map(p => ({
+                    id: String(p.id),
+                    nombre: p.nombre || p.title || 'Producto',
+                    precio: Number(p.precio) || 0,
+                    categoria: p.categoria || 'sin-categoria',
+                    urlImagen: p.urlImagen || p.url || '',
+                    ...p
+                }));
+                categories = new Set(products.map(p => p.categoria || 'sin-categoria'));
+                renderFilters();
+                renderProducts();
+            }
+
+            function renderFilters() {
+                filterCat.innerHTML = '<option value="">Todas las categorías</option>';
+                Array.from(categories).sort().forEach(cat => {
+                    const o = document.createElement('option'); o.value = cat; o.textContent = cat;
+                    filterCat.appendChild(o);
+                });
+            }
+
+            // Leer la tasa desde la API
+            async function currentRate() {
+                try {
+                    const response = await fetch('/api/rate');
+                    const data = await response.json();
+                    return data.rate;
+                } catch (e) {
+                    console.error('Error obteniendo tasa:', e);
+                    return 216.38;
+                }
+            }
+
+            // Render productos
+            async function renderProducts() {
+                const q = (searchInput.value || '').toLowerCase();
+                const cat = filterCat.value;
+                productsEl.innerHTML = '';
+                const filtered = products.filter(p => {
+                    if (cat && p.categoria !== cat) return false;
+                    if (q && !(p.nombre || '').toLowerCase().includes(q)) return false;
+                    return true;
+                });
+                if (!filtered.length) {
+                    productsEl.innerHTML = '<div style="color:#6b7280;padding:10px">No se encontraron productos.</div>';
+                    return;
+                }
+                const rate = await currentRate();
+                const isServer = window.location.protocol !== 'file:';
+                filtered.forEach(p => {
+                    let imagePath = 'https://via.placeholder.com/300x200?text=Producto';
+                    if (p.urlImagen) {
+                        if (p.urlImagen.startsWith('http://') || p.urlImagen.startsWith('https://')) {
+                            // Es una URL externa, usar tal cual
+                            imagePath = p.urlImagen;
+                        } else {
+                            // Es una ruta local, ajustar según el entorno
+                            imagePath = isServer ? '/' + p.urlImagen : p.urlImagen;
+                        }
+                    }
+                    const card = document.createElement('div');
+                    card.className = 'product';
+                    card.innerHTML = `
+                <img alt="${p.nombre}" src="${imagePath}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+No+Disponible'" />
+                <div class="meta"><div class="name">${p.nombre}</div><div class="price-usd">${fmt(p.precio)}</div></div>
+                <div class="row">
+                    <div class="price-bs">${fmt(p.precio * rate, { bs: true })}</div>
+                </div>
+                <button class="btn-add" data-product-id="${p.id}">Agregar al Carrito</button>
+            `;
+                    card.querySelector('.btn-add').addEventListener('click', () => addToCart(p.id));
+                    productsEl.appendChild(card);
+                });
+            }
+
+            // Carrito funciones
+            function loadCartFromStorage() {
+                const s = localStorage.getItem(CART_KEY);
+                if (s) {
+                    try {
+                        cart = JSON.parse(s);
+                    } catch (e) {
+                        cart = {};
+                    }
+                } else {
+                    cart = {};
+                }
+                renderCart();
+            }
+
+            function saveCartToStorage() {
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            }
+
+            function renderCart() {
+                cartList.innerHTML = '';
+                const ids = Object.keys(cart);
+                if (!ids.length) {
+                    cartList.innerHTML = '<li style="color:#6b7280;padding:10px">El carrito está vacío.</li>';
+                    updateTotals();
+                    return;
+                }
+                ids.forEach(id => {
+                    const item = cart[id];
+                    const product = products.find(p => p.id === id);
+                    if (!product) return;
+                    const li = document.createElement('li');
+                    li.className = 'cart-item';
+                    li.innerHTML = `
+                        <img src="${product.urlImagen || 'https://via.placeholder.com/50x50?text=Img'}" alt="${product.nombre}" onerror="this.src='https://via.placeholder.com/50x50?text=Img'">
+                        <div style="flex:1">
+                            <div style="font-weight:600">${product.nombre}</div>
+                            <div style="display:flex;align-items:center;gap:5px;margin-top:5px">
+                                <button style="background:#ff6b6b;color:white;border:none;border-radius:4px;width:20px;height:20px;cursor:pointer;font-size:0.8rem" onclick="updateQuantity('${id}', -1)">-</button>
+                                <input type="number" value="${item.qty}" min="1" style="width:40px;text-align:center;border:1px solid #ccc;border-radius:4px" onchange="setQuantity('${id}', this.value)">
+                                <button style="background:#2ed573;color:white;border:none;border-radius:4px;width:20px;height:20px;cursor:pointer;font-size:0.8rem" onclick="updateQuantity('${id}', 1)">+</button>
+                            </div>
+                        </div>
+                        <div style="text-align:right">
+                            <div style="font-weight:600">${fmt(product.precio * item.qty)}</div>
+                            <button style="background:none;border:none;color:#ff6b6b;cursor:pointer;font-size:1.2rem" onclick="removeFromCart('${id}')">×</button>
+                        </div>
+                    `;
+                    cartList.appendChild(li);
+                });
+                updateTotals();
+            }
+
+            async function updateTotals() {
+                const ids = Object.keys(cart);
+                let subtotal = 0;
+                ids.forEach(id => {
+                    const item = cart[id];
+                    const product = products.find(p => p.id === id);
+                    if (product) subtotal += product.precio * item.qty;
+                });
+                const iva = subtotal * IVA;
+                const total = subtotal + iva;
+                subtotalEl.textContent = fmt(subtotal);
+                ivaEl.textContent = fmt(iva);
+                totalEl.textContent = fmt(total);
+                checkoutBtn.disabled = !ids.length;
+            }
+
+            function addToCart(id, qty = 1) {
+                if (cart[id]) {
+                    cart[id].qty += qty;
+                } else {
+                    cart[id] = { qty };
+                }
+                saveCartToStorage();
+                renderCart();
+                showMsg(`Producto agregado al carrito`, false);
+            }
+
+            function removeFromCart(id) {
+                delete cart[id];
+                saveCartToStorage();
+                renderCart();
+                showMsg(`Producto removido del carrito`, false);
+            }
+
+            function clearCart() {
+                cart = {};
+                saveCartToStorage();
+                renderCart();
+                showMsg('Carrito vacío');
+            }
+
+            function updateQuantity(id, delta) {
+                if (!cart[id]) return;
+                cart[id].qty += delta;
+                if (cart[id].qty <= 0) {
+                    delete cart[id];
+                }
+                saveCartToStorage();
+                renderCart();
+            }
+
+            function setQuantity(id, qty) {
+                qty = parseInt(qty);
+                if (isNaN(qty) || qty <= 0) {
+                    delete cart[id];
+                } else {
+                    cart[id].qty = qty;
+                }
+                saveCartToStorage();
+                renderCart();
+            }
+
+            function checkout() {
+                if (!Object.keys(cart).length) return showMsg('El carrito está vacío', true);
+                // Procesar el pago
+                processPayment();
+            }
+
+            function processPayment() {
+                // Simular procesamiento de pago
+                showMsg('Procesando pago...', false);
+                setTimeout(() => {
+                    // Simular éxito del pago
+                    showMsg('Pago procesado exitosamente. ¡Gracias por su compra!', false);
+                    // Generar y descargar factura PDF
+                    generateInvoicePDF();
+                    // Limpiar carrito después del pago
+                    cart = {};
+                    saveCartToStorage();
+                    renderCart();
+                }, 2000);
+            }
+
+            function generateInvoicePDF() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Obtener datos del cliente
+                let clienteNombre = 'Cliente';
+                let clienteCedula = '';
+                try {
+                    const cedula = sessionStorage.getItem('clientCedula');
+                    if (cedula) {
+                        const userData = localStorage.getItem(cedula);
+                        if (userData) {
+                            const parsed = JSON.parse(userData);
+                            clienteNombre = parsed.name || parsed.nombre || 'Cliente';
+                            clienteCedula = parsed.cedula || '';
+                        }
+                    }
+                } catch (e) {
+                    console.log('No se pudo obtener datos del cliente:', e);
+                }
+
+                // Configurar fuente y colores
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(20);
+                doc.setTextColor(0, 209, 255); // Azul neón
+                doc.text('KING DISEÑO', 105, 20, { align: 'center' });
+
+                doc.setFontSize(14);
+                doc.setTextColor(0, 0, 0);
+                doc.text('Factura de Compra', 105, 35, { align: 'center' });
+
+                // Información del cliente
+                const date = new Date().toLocaleDateString('es-ES');
+                doc.setFontSize(10);
+                doc.text(`Fecha: ${date}`, 20, 50);
+                
+                // Nombre del cliente
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Cliente: ${clienteNombre}`, 20, 58);
+                if (clienteCedula) {
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(`Cédula: ${clienteCedula}`, 20, 65);
+                }
+
+                // Línea separadora
+                doc.setLineWidth(0.5);
+                doc.line(20, 55, 190, 55);
+
+                // Encabezados de tabla
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(12);
+                doc.text('Producto', 20, 70);
+                doc.text('Cant.', 120, 70);
+                doc.text('Precio', 150, 70);
+                doc.text('Total', 180, 70);
+
+                // Línea bajo encabezados
+                doc.line(20, 75, 190, 75);
+
+                // Productos
+                let y = 85;
+                const ids = Object.keys(cart);
+                ids.forEach(id => {
+                    const item = cart[id];
+                    const product = products.find(p => p.id === id);
+                    if (product) {
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10);
+                        const productName = product.nombre.length > 30 ? product.nombre.substring(0, 30) + '...' : product.nombre;
+                        doc.text(productName, 20, y);
+                        doc.text(item.qty.toString(), 125, y);
+                        doc.text(fmt(product.precio), 150, y);
+                        doc.text(fmt(product.precio * item.qty), 180, y);
+                        y += 10;
+                    }
+                });
+
+                // Línea separadora
+                doc.line(20, y, 190, y);
+                y += 10;
+
+                // Totales
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(12);
+                const subtotal = parseFloat(subtotalEl.textContent.replace('$', '').replace(',', ''));
+                const iva = parseFloat(ivaEl.textContent.replace('$', '').replace(',', ''));
+                const total = parseFloat(totalEl.textContent.replace('$', '').replace(',', ''));
+
+                doc.text(`Subtotal: ${fmt(subtotal)}`, 150, y);
+                y += 10;
+                doc.text(`IVA (5%): ${fmt(iva)}`, 150, y);
+                y += 10;
+                doc.text(`Total: ${fmt(total)}`, 150, y);
+
+                // Mensaje de agradecimiento
+                y += 20;
+                doc.setFont('helvetica', 'italic');
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text('¡Gracias por su compra en KING DISEÑO!', 105, y, { align: 'center' });
+
+                // Descargar PDF
+                doc.save(`factura_${date.replace(/\//g, '-')}.pdf`);
+            }
+
+            function showMsg(msg, error = false) {
+                // Simple mensaje temporal
+                const el = document.createElement('div');
+                el.style.cssText = `position:fixed;top:20px;right:20px;background:${error ? '#ff4757' : '#2ed573'};color:white;padding:10px;border-radius:8px;z-index:1000`;
+                el.textContent = msg;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 3000);
+            }
+
+            // Controles UI
+            filterCat.addEventListener('change', renderProducts);
+            searchInput.addEventListener('input', renderProducts);
+            checkoutBtn.addEventListener('click', checkout);
+
+            // Inicialización
+            (function init() {
+                const savedRate = localStorage.getItem(RATE_KEY);
+                if (!savedRate) {
+                    localStorage.setItem(RATE_KEY, '216.38');
+                    rateInput.value = '216.38';
+                } else {
+                    rateInput.value = savedRate;
+                }
+                loadProducts();
+                initTheme();
+            })();
+
+            // Theme Toggle
+            function initTheme() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                // Load saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    html.setAttribute('data-theme', 'light');
+                    themeToggle.textContent = '🌞';
+                    themeToggle.title = 'Cambiar a Tema Oscuro';
+                } else {
+                    themeToggle.textContent = '🌙';
+                    themeToggle.title = 'Cambiar a Tema Claro';
+                }
+
+                // Theme toggle event
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = html.getAttribute('data-theme');
+                    if (currentTheme === 'light') {
+                        html.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'dark');
+                        themeToggle.textContent = '🌙';
+                        themeToggle.title = 'Cambiar a Tema Claro';
+                    } else {
+                        html.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        themeToggle.textContent = '🌞';
+                        themeToggle.title = 'Cambiar a Tema Oscuro';
+                    }
+                });
+            }
+
+        })();
+    </script>
+</body>
+
+
+</html>
+       

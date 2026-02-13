@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "products": [],
+  "clients": [],
+  "transactions": [],
+  "rate": 216.38,
+  "settings": {
+    "currency": "USD",
+    "language": "es",
+    "timezone": "America/Caracas"
+  },
+  "metadata": {
+    "created": "2026-02-06T13:00:12.566Z",
+    "lastBackup": null,
+    "totalTransactions": 0,
+    "lastModified": "2026-02-06T13:00:12.584Z"
+  }
+}

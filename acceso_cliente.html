@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <title>Acceso Cliente - KING DISEÑO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================================== */
+        /* VARIABLES CSS MODERNAS CON TEMA */
+        /* ==================================== */
+        :root {
+            /* Tema Claro */
+            --primary-blue: #1e40af;
+            --dark-blue: #0f172a;
+            --light-blue: #dbeafe;
+            --accent-orange: #f59e0b;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --white: #ffffff;
+            --gray-light: #f1f5f9;
+            --gray-medium: #64748b;
+            --bg-primary: linear-gradient(135deg, var(--gray-light) 0%, #e2e8f0 100%);
+            --bg-secondary: var(--white);
+            --text-primary: var(--dark-blue);
+            --text-secondary: var(--gray-medium);
+            --border-color: rgba(255, 255, 255, 0.8);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-orange) 0%, #ea580c 100%);
+            --gradient-purple: linear-gradient(135deg, var(--accent-purple) 0%, #7c3aed 100%);
+        }
+
+        /* Tema Oscuro */
+        [data-theme="dark"] {
+            --primary-blue: #3b82f6;
+            --dark-blue: #f8fafc;
+            --light-blue: #1e293b;
+            --accent-orange: #fbbf24;
+            --accent-green: #34d399;
+            --accent-purple: #a78bfa;
+            --white: #0f172a;
+            --gray-light: #1e293b;
+            --gray-medium: #94a3b8;
+            --bg-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border-color: rgba(30, 41, 59, 0.8);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ==================================== */
+        /* ANIMACIONES MODERNAS */
+        /* ==================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ==================================== */
+        /* HEADER MODERNO */
+        /* ==================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            animation: slideIn 1s ease-out;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ==================================== */
+        /* CONTENEDOR PRINCIPAL */
+        /* ==================================== */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            justify-content: center;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 120px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        /* ==================================== */
+        /* FORMULARIOS MODERNOS */
+        /* ==================================== */
+        .form-box {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .form-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .form-box h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        /* ==================================== */
+        /* GRUPOS DE INPUT MODERNOS */
+        /* ==================================== */
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--light-blue);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* ==================================== */
+        /* BOTONES MODERNOS */
+        /* ==================================== */
+        .btn {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            min-height: 56px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-success {
+            background: var(--gradient-accent);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* ==================================== */
+        /* TEMA TOGGLE */
+        /* ==================================== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1) rotate(180deg);
+        }
+
+        /* ==================================== */
+        /* RESPONSIVE DESIGN */
+        /* ==================================== */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .main-container {
+                margin-top: 100px;
+                gap: 20px;
+            }
+
+            .form-box {
+                padding: 30px 25px;
+                max-width: 100%;
+            }
+
+            .form-box h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .main-container {
+                margin-top: 80px;
+                padding: 0 10px;
+            }
+
+            .form-box {
+                padding: 25px 20px;
+            }
+
+            .input-group input {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        /* ==================================== */
+        /* ANIMACIONES DE CARGA */
+        /* ==================================== */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ==================================== */
+        /* MENSAJES DE ERROR/SUCCESS */
+        /* ==================================== */
+        .message {
+            margin-top: 20px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            animation: pulse 2s ease-in-out;
+        }
+
+        .message.success {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+            color: var(--white);
+        }
+
+        .message.error {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: var(--white);
+        }
+
+        /* ==================================== */
+        /* ACCIONES ADICIONALES */
+        /* ==================================== */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .actions a:hover {
+            color: var(--accent-orange);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="theme-toggle" title="Cambiar Tema">
+        🌙
+    </button>
+
+    <!-- Header -->
+    <header>
+        <h1>KING DISEÑO</h1>
+        <nav class="header-nav">
+            <button class="nav-btn" onclick="window.location.href='index.html'">← Tienda</button>
+            <button class="nav-btn" onclick="window.location.href='gestion.html'">Panel Admin</button>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Welcome Section -->
+        <div class="form-box">
+            <h2>👋 ¡Bienvenido a KING DISEÑO!</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary);">
+                Accede a tu cuenta de cliente para disfrutar de nuestros productos y servicios exclusivos.
+            </p>
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="window.location.href='registro.html'">
+                    <span>🚀 Registrarse</span>
+                </button>
+                <button class="btn btn-success" onclick="window.location.href='registro.html'">
+                    <span>🔐 Iniciar Sesión</span>
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="index.html" style="color: var(--accent-orange); font-weight: 600;">
+                    ← Volver a la Tienda
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                themeToggle.title = 'Cambiar a Tema Claro';
+            } else {
+                themeToggle.textContent = '🌙';
+                themeToggle.title = 'Cambiar a Tema Oscuro';
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('theme-toggle');
+            const currentTheme = html.getAttribute('data-theme');
+
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+                themeToggle.title = 'Cambiar a Tema Oscuro';
+                showMessage('☀️ Tema claro activado', 'success');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+                themeToggle.title = 'Cambiar a Tema Claro';
+                showMessage('🌙 Tema oscuro activado', 'success');
+            }
+        }
+
+        function showMessage(message, type, targetId = null) {
+            const target = targetId ? document.getElementById(targetId) : document.body;
+
+            // Remove existing messages
+            const existing = target.querySelector('.message');
+            if (existing) existing.remove();
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = message;
+
+            target.appendChild(messageDiv);
+
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+
+            // Event listeners
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            // Check if user is already logged in
+            const existingClient = localStorage.getItem('cliente') || localStorage.getItem('perfilCliente');
+            if (existingClient) {
+                showMessage('ℹ️ Ya tienes una sesión activa. Redirigiendo...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'perfil.html';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

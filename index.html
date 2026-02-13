@@ -1,0 +1,718 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING DISEÑO - Tecnología de Vanguardia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Variables y Reset --- */
+        :root {
+            --bg-body: #08090d;
+            --bg-card: #12141c;
+            --accent: #00d1ff; /* Azul neón de la imagen */
+            --accent-glow: rgba(0, 209, 255, 0.4);
+            --accent-orange: #ff8c00;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="light"] {
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --accent: #1e40af;
+            --accent-glow: rgba(30, 64, 175, 0.4);
+            --accent-orange: #f59e0b;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --glass: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: var(--bg-body);
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(0, 209, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.05) 0%, transparent 40%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        /* --- Header --- */
+        header {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+
+
+        .nav-btn {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+
+        /* --- Hero Section --- */
+        .presentation-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .presentation-content {
+            flex: 1;
+        }
+
+        .presentation-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .presentation-image {
+            flex: 1;
+        }
+
+        .presentation-image video {
+            width: 100%;
+            max-height: 450px; /* Altura controlada para que no ocupe toda la pantalla */
+            object-fit: cover; /* El video se recorta suavemente para llenar el espacio */
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Features Section --- */
+        .features-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* --- Inventory Section --- */
+        .inventory-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .inventory-section h2 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .category-group {
+            margin-bottom: 50px;
+        }
+
+        .category-banner {
+            position: relative;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-banner:hover .category-image {
+            transform: scale(1.05);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 100%);
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .category-overlay h3 {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 220px;
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .product-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image-container img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .product-price {
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .btn-whatsapp {
+            margin-top: auto;
+            background: #25d366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128c7e;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 30px;
+            margin-top: auto;
+        }
+
+        /* --- Advertising Banners Section --- */
+        .advertising-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .advertising-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .ad-banner {
+            position: relative;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .ad-banner:hover {
+            transform: translateY(-5px);
+        }
+
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .ad-banner:hover .ad-image {
+            transform: scale(1.05);
+        }
+
+        .ad-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ad-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(30, 58, 138, 0.4) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: var(--white);
+        }
+
+        .ad-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .ad-overlay p {
+            margin: 0 0 15px 0;
+            font-size: 1rem;
+        }
+
+        .ad-button {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .ad-button:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+        }
+
+        /* --- Cashea Banner Section --- */
+        .cashea-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .cashea-card {
+            background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%);
+            border: 2px solid #fbc02d;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            box-shadow: var(--shadow-xl);
+            transition: transform 0.3s ease;
+        }
+
+        .cashea-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .cashea-card svg {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .cashea-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: #f57f17;
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+        }
+
+        .cashea-content p {
+            margin: 0 0 15px 0;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+        }
+
+        .cashea-button {
+            background: #fbc02d;
+            color: var(--dark-blue);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.3);
+        }
+
+        .cashea-button:hover {
+            background: #f9a825;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(251, 192, 45, 0.4);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .presentation-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .advertising-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .ad-banner {
+                height: 150px;
+            }
+
+            .cashea-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .cashea-card svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>KING DISEÑO - Tecnología de Vanguardia</h1>
+        <nav class="nav-container">
+            <a href="soporte tecnico.html" class="nav-btn">Soporte Técnico</a>
+            <a href="#inventory" class="nav-btn">Ver Inventario</a>
+            <a href="admin_login.html" class="nav-btn">Acceso Admin</a>
+            <a href="pagina_cliente.html" class="nav-btn">Acceso Cliente</a>
+            <a href="erick.html" class="nav-btn">Ir a Pago</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="presentation-section" style="animation: fadeInUp 1s ease-out;">
+            <div class="presentation-content">
+                <h2>Tecnología de Vanguardia a tu Alcance</h2>
+                <p>En KING DISEÑO, combinamos potencia y estilo. Descubre nuestra selección de laptops de última generación, accesorios premium y componentes de alto rendimiento.</p>
+            </div>
+            <div class="presentation-image">
+                <video autoplay muted loop playsinline>
+                    <source src="imagen prese/computadoras.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" style="animation: fadeInUp 1s ease-out 0.2s both;">
+            <h2>¿Por qué elegirnos?</h2>
+            <div class="features-grid">
+                <div class="feature-card" style="animation: pulse 2s ease-in-out infinite;">
+                    <h3>Laptops Potentes</h3>
+                    <p>Equipos optimizados para gaming y trabajo profesional.</p>
+                </div>
+                <div class="feature-card" style="animation: pulse 2s ease-in-out infinite 0.5s;">
+                    <h3>Accesorios Premium</h3>
+                    <p>Mejora tu setup con teclados, mouses y más.</p>
+                </div>
+                <div class="feature-card" style="animation: pulse 2s ease-in-out infinite 1s;">
+                    <h3>Soporte Experto</h3>
+                    <p>Asistencia técnica garantizada para todos nuestros clientes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advertising Banners Section -->
+        <section class="advertising-section" style="animation: fadeInUp 1s ease-out 0.4s both;">
+            <div class="advertising-container">
+                <div class="ad-banner">
+                    <img src="imagen prese/lapto oferta.jpg" alt="Oferta Especial Laptops" class="ad-image">
+                    <div class="ad-overlay">
+                        <h3>¡Oferta Especial!</h3>
+                        <p>Laptops Gamer con hasta 30% de descuento</p>
+                        <a href="#inventory" class="ad-button">Ver Ofertas</a>
+                    </div>
+                </div>
+                <div class="ad-banner">
+                    <img src="imagen prese/delevery.jpg" alt="Envío Gratis" class="ad-image">
+                    <div class="ad-overlay">
+                        <h3>Envío Gratis</h3>
+                        <p>En compras mayores a $200</p>
+                        <a href="#inventory" class="ad-button">Comprar Ahora</a>
+                    </div>
+                </div>
+                <div class="ad-banner">
+                    <img src="VIDEO/14209be516fa515f67b351b20bc84be5 (1).mp4" alt="Video Promocional" class="ad-video">
+                    <div class="ad-overlay">
+                        <h3>Nuevos Componentes</h3>
+                        <p>Descubre las últimas tarjetas gráficas</p>
+                        <a href="#inventory" class="ad-button">Explorar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inventory Section -->
+        <section class="inventory-section" id="inventory" style="animation: fadeInUp 1s ease-out 0.6s both;">
+            <h2>Nuestro Inventario</h2>
+
+            <div class="category-group">
+                <div class="category-banner">
+                    <img src="imagen prese/acessorios.jpg" alt="Accesorios" class="category-image">
+                    <div class="category-overlay"><h3>Accesorios</h3></div>
+                </div>
+                <ul class="products-grid" id="productos-accesorios"></ul>
+            </div>
+
+            <div class="category-group">
+                <div class="category-banner">
+                    <img src="imagen prese/computadora.jpg" alt="Computadoras" class="category-image">
+                    <div class="category-overlay"><h3>Computadoras</h3></div>
+                </div>
+                <ul class="products-grid" id="productos-computadoras"></ul>
+            </div>
+
+            <div class="category-group">
+                <div class="category-banner">
+                    <img src="imagen prese/acessorios 1.jpg" alt="Componentes" class="category-image">
+                    <div class="category-overlay"><h3>Componentes</h3></div>
+                </div>
+                <ul class="products-grid" id="productos-componentes"></ul>
+            </div>
+        </section>
+
+        <!-- Cashea Banner Section -->
+        <section class="cashea-section" style="animation: fadeInUp 1s ease-out 0.8s both;">
+            <div class="cashea-card">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Cashea">
+                    <rect width="512" height="512" rx="100" fill="#FBC02D"/>
+                    <path d="M350 256c0-52-42-94-94-94s-94 42-94 94 42 94 94 94" stroke="#ffffff" stroke-width="45" stroke-linecap="round" fill="none"/>
+                    <circle cx="256" cy="256" r="35" fill="#ffffff"/>
+                </svg>
+                <div class="cashea-content">
+                    <h2>¡También aceptamos Cashea!</h2>
+                    <p>Ahora puedes pagar tus productos favoritos en cuotas sin interés. ¡Compra hoy y paga después!</p>
+                    <a href="#" class="cashea-button">Descargar App</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 KING DISEÑO. Todos los derechos reservados. | <span id="kontak-link" style="cursor: pointer; color: var(--accent-orange); text-decoration: underline;">Kontak</span></p>
+        <div id="contact-menu" style="display: none; position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); background: var(--white); border-radius: 10px; box-shadow: var(--shadow-lg); padding: 15px; z-index: 1000;">
+            <a href="https://instagram.com/kingdiseno" target="_blank" style="display: block; margin: 5px 0; color: var(--primary-blue); text-decoration: none;">📷 Instagram</a>
+            <a href="https://tiktok.com/@kingdiseno" target="_blank" style="display: block; margin: 5px 0; color: var(--primary-blue); text-decoration: none;">🎵 TikTok</a>
+            <a href="https://wa.me/584161611551" target="_blank" style="display: block; margin: 5px 0; color: var(--primary-blue); text-decoration: none;">💬 WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        // --- Configuración ---
+        const MI_TELEFONO = "584161611551"; // Tu número de WhatsApp
+
+        // --- Datos de Productos ---
+        const productos = [
+            { nombre: 'Mouse Óptico Pro', precio: 15.00, categoria: 'accesorios', url: 'IMAGENES/mouse gamer.jpg' },
+            { nombre: 'Mouse Inalámbrico Logitech', precio: 25.00, categoria: 'accesorios', url: 'IMAGENES/mouse inalambrico.jpg' },
+            { nombre: 'Teclado Mecánico RGB', precio: 45.00, categoria: 'accesorios', url: 'IMAGENES/teclado gamer.jpg' },
+            { nombre: 'Teclado Estándar', precio: 20.00, categoria: 'accesorios', url: 'IMAGENES/teclado.jpg' },
+            { nombre: 'Auriculares Gamer RGB', precio: 60.00, categoria: 'accesorios', url: 'IMAGENES/auriculares gamer.jpg' },
+            { nombre: 'Monitor 24" Full HD', precio: 150.00, categoria: 'accesorios', url: 'IMAGENES/monitor.jpg' },
+            { nombre: 'Cámara Web HD', precio: 35.00, categoria: 'accesorios', url: 'IMAGENES/camara.jpg' },
+            { nombre: 'Impresora Epson Multifunción', precio: 120.00, categoria: 'accesorios', url: 'IMAGENES/impresora epso.jpg' },
+            { nombre: 'Router WiFi 5GHz', precio: 50.00, categoria: 'accesorios', url: 'IMAGENES/rounter wifi.jpg' },
+            { nombre: 'Silla Gamer Ergonómica', precio: 200.00, categoria: 'accesorios', url: 'IMAGENES/silla gamer 1.jpg' },
+            { nombre: 'Silla Gamer Premium', precio: 250.00, categoria: 'accesorios', url: 'IMAGENES/silla gamers.jpg' },
+            { nombre: 'Laptop Gamer HP Victus', precio: 850.00, categoria: 'computadoras', url: 'IMAGENES/lapto gamers.jpg' },
+            { nombre: 'PC Oficina Master', precio: 550.00, categoria: 'computadoras', url: 'IMAGENES/pc 1.jpg' },
+            { nombre: 'PC Gamer Avanzado', precio: 700.00, categoria: 'computadoras', url: 'IMAGENES/pc 2.jpg' },
+            { nombre: 'PC Básico para Oficina', precio: 400.00, categoria: 'computadoras', url: 'IMAGENES/pc 3.jpg' },
+            { nombre: 'Mini PC Compacto', precio: 300.00, categoria: 'computadoras', url: 'IMAGENES/mini cpu.jpg' },
+            { nombre: 'Tarjeta RTX 3060', precio: 400.00, categoria: 'componentes', url: 'IMAGENES/rx900.webp' },
+            { nombre: 'Tarjeta Gráfica AMD', precio: 350.00, categoria: 'componentes', url: 'IMAGENES/targeta grafica.jpg' },
+            { nombre: 'Procesador AMD Ryzen', precio: 180.00, categoria: 'componentes', url: 'IMAGENES/amd rayzer.jpg' },
+            { nombre: 'Procesador Intel Core 7', precio: 220.00, categoria: 'componentes', url: 'IMAGENES/core 7.jpg' },
+            { nombre: 'Procesador Intel Core', precio: 150.00, categoria: 'componentes', url: 'IMAGENES/intel core.jpg' },
+            { nombre: 'Disco Duro 1TB SSD', precio: 90.00, categoria: 'componentes', url: 'IMAGENES/disco 1TB.jpg' }
+        ];
+
+        // --- Renderizar Productos ---
+        function renderProducts() {
+            const grids = {
+                accesorios: document.getElementById('productos-accesorios'),
+                computadoras: document.getElementById('productos-computadoras'),
+                componentes: document.getElementById('productos-componentes')
+            };
+
+            Object.values(grids).forEach(g => { if (g) g.innerHTML = ''; });
+
+            productos.forEach(p => {
+                const targetGrid = grids[p.categoria];
+                if (targetGrid) {
+                    const card = document.createElement('li');
+                    card.className = 'product-card';
+                    
+                    const mensajeWa = encodeURIComponent(`Hola KING DISEÑO, me interesa el producto: ${p.nombre} ($${p.precio.toFixed(2)})`);
+                    const urlWhatsapp = `https://wa.me/${MI_TELEFONO}?text=${mensajeWa}`;
+
+                    card.innerHTML = `
+                        <div class="product-image-container">
+                            <img src="${p.url}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/200?text=Sin+Imagen'">
+                        </div>
+                        <div class="product-info">
+                            <h4>${p.nombre}</h4>
+                            <p class="product-price">$${p.precio.toFixed(2)}</p>
+                            <a href="${urlWhatsapp}" target="_blank" class="btn-whatsapp">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" fill="white" style="margin-right: 8px;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 .2c54.9 0 105.8 21.2 144.2 59.5 38.5 38.3 59.5 89.4 59.5 144.2 0 110.2-89.9 200-200 200-35.2 0-68.7-9.2-98.6-26.4l-7.1-4.2-73.3 19.3 19.7-71.5-4.5-7.4c-18.2-29.9-28.1-64.7-28.1-101.3 0-110.2 89.9-200 200 200-35.2 0-68.7-9.2-98.6-26.4l-7.1-4.2-73.3 19.3 19.7-71.5-4.5-7.4c-18.2-29.9-28.1-64.7-28.1-101.3 0-110.2 89.9-200 200 200z"/></svg>
+                                Consultar
+                            </a>
+                        </div>
+                    `;
+                    targetGrid.appendChild(card);
+                }
+            });
+        }
+
+        // --- Inicialización ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+
+        // --- Contact Menu Toggle ---
+        const kontakLink = document.getElementById('kontak-link');
+        const contactMenu = document.getElementById('contact-menu');
+
+        kontakLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactMenu.style.display = contactMenu.style.display === 'none' || contactMenu.style.display === '' ? 'block' : 'none';
+        });
+
+        // Hide menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!kontakLink.contains(e.target) && !contactMenu.contains(e.target)) {
+                contactMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

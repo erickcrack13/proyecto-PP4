@@ -1,0 +1,318 @@
+Attached HTML and CSS Context
+
+<div class="profile-container">
+        <h1 id="welcome-message">¡Bienvenido, edwar castillo!</h1>
+
+        <div class="info-box">
+            <h2>Información Personal</h2>
+            <p id="user-info">
+                        <p><strong>Cédula:</strong> 15011280</p>
+                        <p><strong>Nombre:</strong> edwar castillo</p>
+                        <p><strong>Correo:</strong> N/A</p>
+                        <p><strong>Teléfono:</strong> 04120646161</p>
+                    </p>
+        </div>
+
+        <div class="info-box">
+            <h2>Mi Billetera</h2>
+            <p><strong>Saldo Actual:</strong> <span id="wallet-balance">$1000.00</span></p>
+            <div class="wallet-actions">
+                <input type="number" id="amount-input" placeholder="Monto" min="0.01" step="0.01">
+                <button class="deposit" id="deposit-button">Depositar</button>
+                <button class="withdraw" id="withdraw-button">Retirar</button>
+            </div>
+            <p id="wallet-message" class="error-message" style="display: none;"></p>
+        </div>
+
+        <div class="info-box product-section">
+            <h2>Nuestros Productos</h2>
+            <div class="product-categories">
+                <button class="category-button active" data-category="todos">Todos</button>
+                <button class="category-button" data-category="accesorios">Accesorios</button>
+                <button class="category-button" data-category="computadoras">Computadoras</button>
+                <button class="category-button" data-category="componentes">Componentes</button>
+                <button class="category-button" data-category="perifericos">Periféricos</button>
+            </div>
+            <div id="product-list" class="product-grid"><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Mouse">
+                    <h3>Mouse</h3>
+                    <p class="price">$15.00</p>
+                    <p class="stock stock-available">Stock: 20</p>
+                    <button class="add-to-cart-btn" data-product-id="1">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Audífonos">
+                    <h3>Audífonos</h3>
+                    <p class="price">$25.00</p>
+                    <p class="stock stock-available">Stock: 12</p>
+                    <button class="add-to-cart-btn" data-product-id="2">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Teclado">
+                    <h3>Teclado</h3>
+                    <p class="price">$30.00</p>
+                    <p class="stock stock-low">Stock: 5</p>
+                    <button class="add-to-cart-btn" data-product-id="3">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Monitor">
+                    <h3>Monitor</h3>
+                    <p class="price">$80.00</p>
+                    <p class="stock stock-out">Agotado</p>
+                    <button class="add-to-cart-btn" data-product-id="4" disabled="">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Webcam">
+                    <h3>Webcam</h3>
+                    <p class="price">$40.00</p>
+                    <p class="stock stock-available">Stock: 18</p>
+                    <button class="add-to-cart-btn" data-product-id="5">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Impresora">
+                    <h3>Impresora</h3>
+                    <p class="price">$120.00</p>
+                    <p class="stock stock-low">Stock: 3</p>
+                    <button class="add-to-cart-btn" data-product-id="6">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Computadora 4ta">
+                    <h3>Computadora 4ta</h3>
+                    <p class="price">$80.00</p>
+                    <p class="stock stock-low">Stock: 7</p>
+                    <button class="add-to-cart-btn" data-product-id="7">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Computadora 5ta">
+                    <h3>Computadora 5ta</h3>
+                    <p class="price">$100.00</p>
+                    <p class="stock stock-available">Stock: 15</p>
+                    <button class="add-to-cart-btn" data-product-id="8">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Computadora 6ta">
+                    <h3>Computadora 6ta</h3>
+                    <p class="price">$120.00</p>
+                    <p class="stock stock-low">Stock: 2</p>
+                    <button class="add-to-cart-btn" data-product-id="9">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Computadora 7ma">
+                    <h3>Computadora 7ma</h3>
+                    <p class="price">$220.00</p>
+                    <p class="stock stock-out">Agotado</p>
+                    <button class="add-to-cart-btn" data-product-id="10" disabled="">Añadir al Carrito</button>
+                </div><div class="product-item">
+                    <img src="https://via.placeholder.com/150x120?text=No+Image" alt="Computadora 9na">
+                    <h3>Computadora 9na</h3>
+                    <p class="price">$300.00</p>
+                    <p class="stock stock-low">Stock: 10</p>
+                    <button class="add-to-cart-btn" data-product-id="11">Añadir al Carrito</button>
+                </div></div>
+        </div>
+
+        <div class="info-box" id="cart-box">
+            <h2>Mi Carrito de Compras</h2>
+            <div id="cart-container"><p>Tu carrito está vacío.</p></div>
+            <div class="checkout-buttons">
+                <button id="clear-cart-button" disabled="">Vaciar Carrito</button>
+                <button id="checkout-button" disabled="">Comprar Ahora</button>
+            </div>
+            <p id="cart-message" class="error-message" style="display: none;"></p>
+        </div>
+
+        <div class="info-box">
+            <h2>Historial de Compras</h2>
+            <div id="purchase-history-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID de Compra</th>
+                            <th>Fecha</th>
+                            <th>Artículo</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            
+                    <tr>
+                        <td>001</td>
+                        <td>2025-07-10</td>
+                        <td>Laptop Gaming</td>
+                        <td>$1200.00</td>
+                        <td>Completada</td>
+                    </tr>
+                
+                    <tr>
+                        <td>002</td>
+                        <td>2025-07-05</td>
+                        <td>Mouse Inalámbrico</td>
+                        <td>$35.50</td>
+                        <td>Completada</td>
+                    </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="logout-button">Cerrar Sesión</button>
+        </div>
+    </div>
+
+
+/* Matched Rule from user-agent */
+div {
+  display: block;
+}
+
+/* Matched Rule from user-agent */
+address, blockquote, center, div, figure, figcaption, footer, form, header, hr, legend, listing, main, p, plaintext, pre, summary, xmp, article, aside, h1, h2, h3, h4, h5, h6, hgroup, nav, section, search, table, caption, colgroup, col, thead, tbody, tfoot, tr, td, th, dir, dd, dl, dt, menu, ol, ul, li, bdi, output, [dir="ltr" i], [dir="rtl" i], [dir="auto" i] {
+  unicode-bidi: isolate;
+}
+
+/* Matched Rule from regular */
+.profile-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.10);
+  width: 900px;
+  max-width: 95vw;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 1;
+  margin-top: 120px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 1s ease-out;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 18px;
+  box-shadow: rgba(99, 102, 241, 0.1) 0px 8px 32px;
+  width: 900px;
+  max-width: 95vw;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 1;
+  margin-top: 120px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(255, 255, 255, 0.2);
+  border-right-color: rgba(255, 255, 255, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+  border-left-color: rgba(255, 255, 255, 0.2);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: fadeInUp;
+  animation-timeline: auto;
+  animation-range-start: normal;
+  animation-range-end: normal;
+}
+
+/* Matched Rule from regular */
+.profile-container {
+  padding: 25px;
+  width: 95vw;
+  margin-top: 80px;
+  padding-top: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  width: 95vw;
+  margin-top: 80px;
+}
+
+/* Matched Rule from regular */
+.profile-container {
+  padding: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+/* Inherited from ancestor level 1 (user-agent) */
+body {
+  display: block;
+  margin-top: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+}
+
+/* Inherited from ancestor level 1 (regular) */
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+  position: relative;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+  font-family: Montserrat, Arial, sans-serif;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-image: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(55, 48, 163) 100%);
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  position: relative;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+}
+
+/* Inherited from ancestor level 2 (user-agent) */
+html {
+  display: block;
+}
+
+/* Inherited from ancestor level 2 (user-agent) */
+:root {
+  view-transition-name: root;
+}

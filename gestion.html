@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <title>KING DISEÑO - Panel de Gestión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* ==================================== */
+        /* VARIABLES CSS MODERNAS CON TEMA */
+        /* ==================================== */
+        :root {
+            /* Tema Claro */
+            --primary-blue: #1e40af;
+            --dark-blue: #0f172a;
+            --light-blue: #dbeafe;
+            --accent-orange: #f59e0b;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --white: #ffffff;
+            --gray-light: #f1f5f9;
+            --gray-medium: #64748b;
+            --bg-primary: linear-gradient(135deg, var(--gray-light) 0%, #e2e8f0 100%);
+            --bg-secondary: var(--white);
+            --text-primary: var(--dark-blue);
+            --text-secondary: var(--gray-medium);
+            --border-color: rgba(255, 255, 255, 0.8);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-orange) 0%, #ea580c 100%);
+            --gradient-purple: linear-gradient(135deg, var(--accent-purple) 0%, #7c3aed 100%);
+        }
+
+        /* Tema Oscuro */
+        [data-theme="dark"] {
+            --primary-blue: #3b82f6;
+            --dark-blue: #f8fafc;
+            --light-blue: #1e293b;
+            --accent-orange: #fbbf24;
+            --accent-green: #34d399;
+            --accent-purple: #a78bfa;
+            --white: #0f172a;
+            --gray-light: #1e293b;
+            --gray-medium: #94a3b8;
+            --bg-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border-color: rgba(30, 41, 59, 0.8);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, var(--gray-light) 0%, #e2e8f0 100%);
+            color: var(--dark-blue);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ==================================== */
+        /* ANIMACIONES MODERNAS */
+        /* ==================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ==================================== */
+        /* HEADER MODERNO */
+        /* ==================================== */
+        header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .nav-btn span {
+            position: relative;
+            z-index: 3;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover::after {
+            opacity: 1;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-4px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: var(--gradient-purple);
+            filter: brightness(1.1);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-2px) rotateX(2deg) rotateY(2deg);
+            transition: all 0.1s ease;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* ==================================== */
+        /* CONTENEDOR PRINCIPAL */
+        /* ==================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================================== */
+        /* SECCIONES CON TARJETAS MODERNAS */
+        /* ==================================== */
+        .section-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 0.8s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-card h2,
+        .section-card h3 {
+            color: var(--dark-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--accent-orange);
+            padding-bottom: 10px;
+        }
+
+        /* ==================================== */
+        /* CONTROLES DE ADMINISTRACIÓN */
+        /* ==================================== */
+        .admin-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: center;
+            background: linear-gradient(135deg, var(--light-blue) 0%, #f8fafc 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 0.95rem;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-controls input {
+            padding: 10px 15px;
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .admin-controls input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        /* ==================================== */
+        /* BOTONES MODERNOS */
+        /* ==================================== */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+            min-height: 48px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary { background: var(--gradient-primary); color: var(--white); }
+        .btn-success { background: var(--gradient-accent); color: var(--white); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: var(--white); }
+        .btn-warning { background: var(--gradient-purple); color: var(--white); }
+        .btn-secondary { background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); color: var(--white); }
+
+        .btn-lg {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            min-height: 52px;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            min-height: 36px;
+        }
+
+        /* ==================================== */
+        /* FORMULARIO DE PRODUCTOS */
+        /* ==================================== */
+        #product-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px 16px;
+            border: 2px solid var(--light-blue);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        /* ==================================== */
+        /* LISTAS DE PRODUCTOS */
+        /* ==================================== */
+        .product-sections-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .product-list {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .product-list h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 8px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--gray-light) 0%, #f8fafc 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .product-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--light-blue) 0%, #f1f5f9 100%);
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 15px;
+            border: 2px solid var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 1rem;
+        }
+
+        .product-details {
+            font-size: 0.85rem;
+            color: var(--gray-medium);
+        }
+
+        .stock-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        .stock-available {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+            color: var(--white);
+        }
+
+        .stock-low {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #d97706 100%);
+            color: var(--white);
+        }
+
+        .stock-out {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: var(--white);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .edit-btn {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: var(--white);
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ==================================== */
+        /* MENSAJES */
+        /* ==================================== */
+        #admin-msg {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+            color: var(--white);
+            font-weight: 600;
+            text-align: center;
+            animation: pulse 2s ease-in-out;
+        }
+
+        /* ==================================== */
+        /* RESPONSIVE DESIGN */
+        /* ==================================== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            #product-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .admin-controls {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .control-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .product-sections-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .product-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .product-image {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .product-actions {
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 15px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-card {
+                padding: 15px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .admin-controls {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>KING DISEÑO - Panel de Gestión</h1>
+        <nav class="header-nav">
+            <a href="index.html" class="nav-btn">← Volver a la Tienda</a>
+            <button class="nav-btn" onclick="window.open('erick.html', '_blank')">Ir a Pagos</button>
+            <button class="nav-btn" onclick="window.open('registro.html', '_blank')">Registro Clientes</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="section-card">
+            <h2>Configuración y Reportes</h2>
+            <div class="admin-controls">
+                <div class="control-group">
+                    <label>Configuración de Tasa</label>
+                    <div class="control-row">
+                        <input id="admin-exchange-rate" type="number" step="0.01" placeholder="36.50">
+                        <button id="admin-save-rate" class="btn btn-success">💾 Guardar Tasa</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Reportes y Sincronización</label>
+                    <div class="control-row">
+                        <button id="admin-export-pdf" class="btn btn-danger btn-lg">📄 Descargar Inventario PDF</button>
+                        <button id="admin-normalize-save" class="btn btn-warning">🔄 Sincronizar Todo</button>
+                        <button id="admin-update-products" class="btn btn-primary">📥 Actualizar Productos desde Servidor</button>
+                    </div>
+                </div>
+            </div>
+            <p id="admin-msg"></p>
+        </section>
+
+        <section class="section-card">
+            <h3>Gestión de Productos</h3>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+
+                <div class="form-group full-width">
+                    <label>📦 Nombre del Producto</label>
+                    <input type="text" id="product-name" placeholder="Ej: Mouse Gamer Pro" required>
+                </div>
+
+                <div class="form-group">
+                    <label>💰 Precio (USD)</label>
+                    <input type="number" id="product-price" step="0.01" placeholder="0.00" required>
+                </div>
+
+                <div class="form-group">
+                    <label>📊 Stock Disponible</label>
+                    <input type="number" id="product-stock" placeholder="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label>🏷️ Categoría</label>
+                    <select id="product-category">
+                        <option value="accesorios">🖱️ Accesorios</option>
+                        <option value="computadoras">💻 Computadoras</option>
+                        <option value="componentes">🔧 Componentes</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>🖼️ URL de Imagen</label>
+                    <input type="text" id="product-image-url" placeholder="https://...">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>📁 Subir archivo local</label>
+                    <input type="file" id="product-image-file" accept="image/*">
+                </div>
+
+                <div class="form-actions full-width">
+                    <button type="submit" id="add-update-btn" class="btn btn-success btn-lg">✅ Guardar Producto</button>
+                    <button type="button" id="clear-form-btn" class="btn btn-secondary">🗑️ Limpiar Formulario</button>
+                </div>
+            </form>
+        </section>
+
+        <div class="product-sections-container">
+            <div class="product-list">
+                <h3>🖱️ Accesorios</h3>
+                <ul id="lista-accesorios"></ul>
+            </div>
+            <div class="product-list">
+                <h3>💻 Computadoras</h3>
+                <ul id="lista-computadoras"></ul>
+            </div>
+            <div class="product-list">
+                <h3>🔧 Componentes</h3>
+                <ul id="lista-componentes"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Check if admin is logged in
+        if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+            alert('Acceso denegado. Debes iniciar sesión como administrador.');
+            window.location.href = 'admin_login.html';
+        }
+
+        const RATE_KEY = 'exchangeRateBsPerUsd';
+        let productos = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadInitialData();
+            setupEventListeners();
+        });
+
+        function loadInitialData() {
+            // Load rate from localStorage
+            const savedRate = localStorage.getItem(RATE_KEY) || "36.50";
+            document.getElementById('admin-exchange-rate').value = savedRate;
+
+            // Load products from localStorage
+            const savedProducts = localStorage.getItem('productos');
+            if (savedProducts) {
+                productos = JSON.parse(savedProducts);
+            } else {
+                // Initialize with default products
+                initializeDefaultProducts();
+            }
+            renderInventory();
+        }
+
+        function initializeDefaultProducts() {
+            const defaultProducts = [
+                { id: "1", nombre: 'Mouse Óptico Pro', precio: 15.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/mouse gamer.jpg' },
+                { id: "2", nombre: 'Mouse Inalámbrico Logitech', precio: 25.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/mouse inalambrico.jpg' },
+                { id: "3", nombre: 'Teclado Mecánico RGB', precio: 45.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/teclado gamer.jpg' },
+                { id: "4", nombre: 'Teclado Estándar', precio: 20.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/teclado.jpg' },
+                { id: "5", nombre: 'Auriculares Gamer RGB', precio: 60.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/auriculares gamer.jpg' },
+                { id: "6", nombre: 'Monitor 24" Full HD', precio: 150.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/monitor.jpg' },
+                { id: "7", nombre: 'Cámara Web HD', precio: 35.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/camara.jpg' },
+                { id: "8", nombre: 'Impresora Epson Multifunción', precio: 120.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/impresora epso.jpg' },
+                { id: "9", nombre: 'Router WiFi 5GHz', precio: 50.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/rounter wifi.jpg' },
+                { id: "10", nombre: 'Silla Gamer Ergonómica', precio: 200.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/silla gamer 1.jpg' },
+                { id: "11", nombre: 'Silla Gamer Premium', precio: 250.00, categoria: 'accesorios', DISPONIBLE: 10, urlImagen: 'IMAGENES/silla gamers.jpg' },
+                { id: "12", nombre: 'Laptop Gamer HP Victus', precio: 850.00, categoria: 'computadoras', DISPONIBLE: 10, urlImagen: 'IMAGENES/lapto gamers.jpg' },
+                { id: "13", nombre: 'PC Oficina Master', precio: 550.00, categoria: 'computadoras', DISPONIBLE: 10, urlImagen: 'IMAGENES/pc 1.jpg' },
+                { id: "14", nombre: 'PC Gamer Avanzado', precio: 700.00, categoria: 'computadoras', DISPONIBLE: 10, urlImagen: 'IMAGENES/pc 2.jpg' },
+                { id: "15", nombre: 'PC Básico para Oficina', precio: 400.00, categoria: 'computadoras', DISPONIBLE: 10, urlImagen: 'IMAGENES/pc 3.jpg' },
+                { id: "16", nombre: 'Mini PC Compacto', precio: 300.00, categoria: 'computadoras', DISPONIBLE: 10, urlImagen: 'IMAGENES/mini cpu.jpg' },
+                { id: "17", nombre: 'Tarjeta RTX 3060', precio: 400.00, categoria: 'componentes', DISPONIBLE: 10, urlImagen: 'IMAGENES/rx900.webp' },
+                { id: "18", nombre: 'Tarjeta Gráfica AMD', precio: 350.00, categoria: 'componentes', DISPONIBLE: 10, urlImagen: 'IMAGENES/targeta grafica.jpg' },
+                { id: "19", nombre: 'Procesador AMD Ryzen', precio: 180.00, categoria: 'componentes', DISPONIBLE: 10, urlImagen: 'IMAGENES/amd rayzer.jpg' },
+                { id: "20", nombre: 'Procesador Intel Core 7', precio: 220.00, categoria: 'componentes', DISPONIBLE: 10, urlImagen: 'IMAGENES/core 7.jpg' },
+                { id: "21", nombre: 'Procesador Intel Core', precio: 150.00, categoria: 'componentes', DISPONIBLE: 10, urlImagen: 'IMAGENES/intel core.jpg' },
+                { id: "22", nombre: 'Disco Duro 1TB SSD', precio: 90.00, categoria: 'componentes', DISPONIBLE: 10, urlImagen: 'IMAGENES/disco 1TB.jpg' }
+            ];
+
+            productos = defaultProducts;
+            localStorage.setItem('productos', JSON.stringify(productos));
+            showMessage('🔄 Inventario inicializado con productos por defecto', true);
+        }
+
+        function renderInventory() {
+            const containers = {
+                accesorios: document.getElementById('lista-accesorios'),
+                computadoras: document.getElementById('lista-computadoras'),
+                componentes: document.getElementById('lista-componentes')
+            };
+
+            Object.values(containers).forEach(c => c.innerHTML = '');
+
+            productos.forEach(p => {
+                const li = document.createElement('li');
+                li.className = 'product-item';
+                const statusClass = p.DISPONIBLE > 10 ? 'stock-available' : (p.DISPONIBLE > 0 ? 'stock-low' : 'stock-out');
+
+                li.innerHTML = `
+                    <img src="${p.urlImagen || 'https://via.placeholder.com/60x60?text=KING'}" class="product-image" onerror="this.src='https://via.placeholder.com/60x60?text=KING'">
+                    <div class="product-info">
+                        <div class="product-name">${p.nombre}</div>
+                        <div class="product-details">$${p.precio.toFixed(2)} | <span class="stock-badge ${statusClass}">Stock: ${p.DISPONIBLE}</span></div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="action-btn edit-btn" onclick="editProduct('${p.id}')">✏️ Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteProduct('${p.id}')">🗑️ Eliminar</button>
+                    </div>
+                `;
+                if(containers[p.categoria]) containers[p.categoria].appendChild(li);
+            });
+        }
+
+        // Función PDF mejorada
+        document.getElementById('admin-export-pdf').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Get current rate from localStorage
+            const tasa = parseFloat(localStorage.getItem(RATE_KEY)) || 36.50;
+
+            // Título con mejor diseño
+            doc.setFontSize(20);
+            doc.setTextColor(30, 58, 138);
+            doc.text("KING DISEÑO - REPORTE DE INVENTARIO", 14, 25);
+
+            // Información adicional
+            doc.setFontSize(11);
+            doc.setTextColor(100);
+            doc.text(`Fecha: ${new Date().toLocaleDateString('es-ES')} | Tasa Bs/USD: ${tasa}`, 14, 35);
+            doc.text(`Total de productos: ${productos.length}`, 14, 42);
+
+            const tableData = productos.map(p => [
+                p.id,
+                p.nombre.substring(0, 30),
+                p.categoria.toUpperCase(),
+                p.DISPONIBLE,
+                `$${p.precio.toFixed(2)}`,
+                `Bs ${(p.precio * tasa).toFixed(2)}`
+            ]);
+
+            doc.autoTable({
+                startY: 50,
+                head: [['ID', 'PRODUCTO', 'CATEGORÍA', 'STOCK', 'PRECIO USD', 'PRECIO BS']],
+                body: tableData,
+                theme: 'striped',
+                headStyles: {
+                    fillColor: [30, 58, 138],
+                    textColor: 255,
+                    fontSize: 10
+                },
+                styles: {
+                    fontSize: 9,
+                    cellPadding: 3
+                },
+                columnStyles: {
+                    0: { cellWidth: 15 },
+                    1: { cellWidth: 50 },
+                    2: { cellWidth: 25 },
+                    3: { cellWidth: 20 },
+                    4: { cellWidth: 25 },
+                    5: { cellWidth: 25 }
+                }
+            });
+
+            doc.save(`Inventario_King_Diseño_${new Date().toISOString().split('T')[0]}.pdf`);
+            showMessage('✅ PDF generado y descargado exitosamente', true);
+        });
+
+        async function handleForm(e) {
+            e.preventDefault();
+            const id = document.getElementById('product-id').value || Date.now().toString();
+
+            let imageUrl = document.getElementById('product-image-url').value;
+            const file = document.getElementById('product-image-file').files[0];
+
+            if (file) {
+                imageUrl = await fileToBase64(file);
+            }
+
+            const newProd = {
+                id: id,
+                nombre: document.getElementById('product-name').value,
+                precio: parseFloat(document.getElementById('product-price').value),
+                DISPONIBLE: parseInt(document.getElementById('product-stock').value),
+                categoria: document.getElementById('product-category').value,
+                urlImagen: imageUrl || '',
+                fechaCreacion: new Date().toISOString(),
+                ultimaActualizacion: new Date().toISOString()
+            };
+
+            const isUpdate = document.getElementById('product-id').value !== '';
+
+            try {
+                if (isUpdate) {
+                    // Update existing product on server
+                    const response = await fetch(`/api/products/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(newProd)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Error al actualizar producto en el servidor');
+                    }
+
+                    // Update local array
+                    const index = productos.findIndex(p => p.id === id);
+                    if (index !== -1) {
+                        productos[index] = newProd;
+                    }
+                } else {
+                    // Add new product to server
+                    const response = await fetch('/api/products', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(newProd)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Error al agregar producto al servidor');
+                    }
+
+                    const savedProduct = await response.json();
+                    // Add to local array
+                    productos.push(savedProduct);
+                }
+
+                // Save to localStorage
+                localStorage.setItem('productos', JSON.stringify(productos));
+                renderInventory();
+                clearForm();
+                showMessage(isUpdate ? '✅ Producto actualizado correctamente' : '✅ Producto agregado correctamente', true);
+            } catch (error) {
+                console.error('Error saving product:', error);
+                showMessage('❌ Error al guardar producto en el servidor', false);
+            }
+        }
+
+        function editProduct(id) {
+            const p = productos.find(p => p.id === id);
+            if(!p) return;
+
+            document.getElementById('product-id').value = p.id;
+            document.getElementById('product-name').value = p.nombre;
+            document.getElementById('product-price').value = p.precio;
+            document.getElementById('product-stock').value = p.DISPONIBLE;
+            document.getElementById('product-category').value = p.categoria;
+            document.getElementById('product-image-url').value = p.urlImagen;
+            document.getElementById('add-update-btn').innerHTML = '🔄 Actualizar Producto';
+
+            // Scroll suave al formulario
+            document.querySelector('#product-form').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+
+        function deleteProduct(id) {
+            if(confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+                productos = productos.filter(p => p.id !== id);
+                localStorage.setItem('productos', JSON.stringify(productos));
+                renderInventory();
+                showMessage('🗑️ Producto eliminado correctamente', true);
+            }
+        }
+
+
+
+        function clearForm() {
+            document.getElementById('product-form').reset();
+            document.getElementById('product-id').value = '';
+            document.getElementById('add-update-btn').innerHTML = '✅ Guardar Producto';
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+
+        function showMessage(message, success = true) {
+            const msgEl = document.getElementById('admin-msg');
+            msgEl.textContent = message;
+            msgEl.style.background = success
+                ? 'linear-gradient(135deg, var(--accent-green) 0%, #059669 100%)'
+                : 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            setTimeout(() => msgEl.textContent = '', 4000);
+        }
+
+        // Theme Toggle Functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                themeToggle.title = 'Cambiar a Tema Claro';
+            } else {
+                themeToggle.textContent = '🌙';
+                themeToggle.title = 'Cambiar a Tema Oscuro';
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('theme-toggle');
+            const currentTheme = html.getAttribute('data-theme');
+
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+                themeToggle.title = 'Cambiar a Tema Oscuro';
+                showMessage('☀️ Tema claro activado', true);
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+                themeToggle.title = 'Cambiar a Tema Claro';
+                showMessage('🌙 Tema oscuro activado', true);
+            }
+        }
+
+        function setupEventListeners() {
+            document.getElementById('product-form').onsubmit = handleForm;
+            document.getElementById('clear-form-btn').onclick = clearForm;
+
+            // Theme toggle
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            document.getElementById('admin-save-rate').onclick = async function() {
+                var rateInput = document.getElementById('admin-exchange-rate');
+                var rate = rateInput.value;
+                var saveBtn = document.getElementById('admin-save-rate');
+                
+                if (!rate || isNaN(rate) || rate <= 0) {
+                    showMessage('❌ Por favor ingresa una tasa válida', false);
+                    return;
+                }
+
+                // Guardar en localStorage primero
+                localStorage.setItem(RATE_KEY, rate);
+                
+                // Cambiar texto del botón
+                saveBtn.innerHTML = '⏳ Guardando...';
+                saveBtn.disabled = true;
+                
+                // Enviar al servidor
+                fetch('/api/rate', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ rate: parseFloat(rate) })
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        showMessage('✅ Tasa guardada correctamente', true);
+                    } else {
+                        showMessage('⚠️ Error al guardar en servidor, pero se guardó localmente', false);
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                    showMessage('⚠️ Sin conexión al servidor, pero se guardó localmente', false);
+                })
+                .finally(function() {
+                    // Restaurar botón siempre
+                    saveBtn.innerHTML = '💾 Guardar Tasa';
+                    saveBtn.disabled = false;
+                });
+            };
+
+
+
+
+            document.getElementById('admin-normalize-save').onclick = () => {
+                // Reload products from localStorage to ensure sync
+                const savedProducts = localStorage.getItem('productos');
+                if (savedProducts) {
+                    productos = JSON.parse(savedProducts);
+                    renderInventory();
+                    showMessage('🔄 Datos sincronizados con localStorage', true);
+                } else {
+                    showMessage('❌ No hay datos guardados para sincronizar', false);
+                }
+            };
+
+            document.getElementById('admin-update-products').onclick = async () => {
+                try {
+                    const response = await fetch('/api/products');
+                    if (!response.ok) {
+                        throw new Error('Error al obtener productos del servidor');
+                    }
+                    const serverProducts = await response.json();
+                    productos = serverProducts;
+                    localStorage.setItem('productos', JSON.stringify(productos));
+                    renderInventory();
+                    showMessage('📥 Productos actualizados desde el servidor', true);
+                } catch (error) {
+                    console.error('Error updating products:', error);
+                    showMessage('❌ Error al actualizar productos desde el servidor', false);
+                }
+            };
+        }
+    </script>
+</body>
+</html>
