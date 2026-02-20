@@ -275,9 +275,7 @@ Panel completo para administradores con control total del sistema.
 - La tasa de cambio se actualiza en tiempo real
 - Los datos se preservan entre sesiones del navegador
 
-### Mejoras Futuras
-- Integración con base de datos real
-- Sistema de autenticación avanzado
+### Mejoras Futuras
 - Notificaciones push
 - Integración con pasarelas de pago reales
 
